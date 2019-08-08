@@ -6,6 +6,10 @@
 package com.sdtssp.hospitalUI;
 import javax.swing.JComboBox;
 import org.jdesktop.swingx.autocomplete.*;
+import java.awt.Toolkit;
+import java.awt.print.*;
+import java.text.MessageFormat;
+import javax.swing.JTable;
 /**
  *
  * @author shreeram
@@ -355,6 +359,16 @@ public class Retail extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        MessageFormat header = new MessageFormat("Bill");
+       MessageFormat footer = new MessageFormat("Page{0,number,integer}");
+       
+        try{
+             jTable1.print(JTable.PrintMode.NORMAL, header, footer);
+        }catch(java.awt.print.PrinterException e){
+            System.err.format("Cannot print the table", e.getMessage());
+           
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
