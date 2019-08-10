@@ -1,7 +1,13 @@
 package com.sdtssp.hospitalUI;
 
-
 import javax.swing.JFrame;
+import com.sdtssp.DBConnect;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,15 +21,24 @@ import javax.swing.JFrame;
  */
 public class LoginPharmcy extends javax.swing.JFrame {
 
+    Statement stmt = null;
+    Connection con = null;
+    ResultSet rs  = null;
+    String user_name,pass;
     /**
      * Creates new form Login
      */
-   
+
     public LoginPharmcy() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         new JFrame().setUndecorated(true);
 
+    }
+    
+    public void Reset(){
+        jTextField1.setText("");
+        jPasswordField1.setText("");
     }
 
     /**
@@ -56,6 +71,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jPanel2.setToolTipText("");
@@ -147,13 +163,39 @@ public class LoginPharmcy extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Retail rt = new Retail();
+        con = DBConnect.Connect();
+        user_name = jTextField1.getText();
+        pass = new String(jPasswordField1.getPassword());
+        try {
+            
+            stmt = con.createStatement();
+            
+            rs= stmt.executeQuery("select user_name,password from users where user_name='"+user_name+"' and password = '"+pass+"';");
+            if(rs.first()) 
+            {
+                this.setVisible(false);
+                rt.setVisible(true);
+            }    
+            else
+            {
+                rs = stmt.executeQuery("select user_name,password from users;");
+                while (rs.next()){
+                    if(rs.getString("user_name").equals(user_name)){
+                        JOptionPane.showMessageDialog(rootPane, "Wrong Password!!!","Error", HEIGHT);
+                        jPasswordField1.setText("");
+                        return;
+                    }    
+                } 
+                JOptionPane.showMessageDialog(rootPane,"User not Registered","Error", HEIGHT);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(LoginPharmcy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         
-        setVisible(false);
-        Retail ob= new Retail();
-        ob.setVisible(true);
-        
-       // Retail rt = new Retail();
-//        rt.setVisible(true);
+//       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -207,5 +249,4 @@ public class LoginPharmcy extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-   
 }
