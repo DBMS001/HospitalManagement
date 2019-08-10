@@ -20,8 +20,8 @@ import java.util.logging.Logger;
 public class DBConnect 
 {
     public static Connection con=null;
-    static String user = System.getenv("USER");
-    static String password = System.getenv("PASSWORD");
+    static String user = System.getenv("user");
+    static String password = System.getenv("password");
             
     
     public static Connection Connect() 
@@ -29,7 +29,7 @@ public class DBConnect
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Hospital",user, password);  
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Hospital","user", "password");  
             return con;
         } catch (ClassNotFoundException|SQLException ex) 
         {

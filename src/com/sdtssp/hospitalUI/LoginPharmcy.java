@@ -1,3 +1,4 @@
+
 package com.sdtssp.hospitalUI;
 
 import javax.swing.JFrame;
@@ -41,6 +42,9 @@ public class LoginPharmcy extends javax.swing.JFrame {
         jPasswordField1.setText("");
     }
 
+    
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,7 +75,6 @@ public class LoginPharmcy extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jPanel2.setToolTipText("");
@@ -163,7 +166,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Retail rt = new Retail();
+    Retail rt = new Retail();
         con = DBConnect.Connect();
         user_name = jTextField1.getText();
         pass = new String(jPasswordField1.getPassword());
@@ -176,6 +179,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
             {
                 this.setVisible(false);
                 rt.setVisible(true);
+                System.err.println("hello"+user_name);
             }    
             else
             {
@@ -184,6 +188,8 @@ public class LoginPharmcy extends javax.swing.JFrame {
                     if(rs.getString("user_name").equals(user_name)){
                         JOptionPane.showMessageDialog(rootPane, "Wrong Password!!!","Error", HEIGHT);
                         jPasswordField1.setText("");
+//                        setVisible(false);
+//                        rt.setVisible(true);
                         return;
                     }    
                 } 
@@ -193,22 +199,10 @@ public class LoginPharmcy extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(LoginPharmcy.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         
-<<<<<<< HEAD
-        setVisible(false);
 
-        Retail ob= new Retail();
-        ob.setVisible(true);
-        
-       // Retail rt = new Retail();
-//        rt.setVisible(true);
-        //Retail rt = new Retail();
-        new Retail().setVisible(true);
 
-=======
-//       
->>>>>>> nilesh
+                             
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -262,4 +256,6 @@ public class LoginPharmcy extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
+   
 }
+
