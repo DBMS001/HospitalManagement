@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.sdtssp;
-
+//Hi shree
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
