@@ -149,11 +149,15 @@ public class LoginPharmcy extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         setVisible(false);
+
         Retail ob= new Retail();
         ob.setVisible(true);
         
        // Retail rt = new Retail();
 //        rt.setVisible(true);
+        //Retail rt = new Retail();
+        new Retail().setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
