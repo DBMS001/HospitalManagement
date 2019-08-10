@@ -1,0 +1,5 @@
+update password in registration table use cascadings
+General ward with bed number in Patient Admit
+Update save btn to discharge in Discharge form
+update query to show only admitted patients in discharge form
+After billing do not show patient in any of the tables;
