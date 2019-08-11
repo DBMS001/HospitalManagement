@@ -7,9 +7,7 @@ package com.sdtssp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,8 +18,8 @@ import java.util.logging.Logger;
 public class DBConnect 
 {
     public static Connection con=null;
-    static String user = System.getenv("USER");
-    static String password = System.getenv("PASSWORD");
+    static String user = System.getenv("SQLUSERNAME");
+    static String password = System.getenv("SQLPASSWORD");
             
     
     public static Connection Connect() 
@@ -29,6 +27,7 @@ public class DBConnect
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
+            System.out.println(user+" "+password);
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Hospital",user, password);  
             return con;
         } catch (ClassNotFoundException|SQLException ex) 

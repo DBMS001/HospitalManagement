@@ -16,6 +16,40 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `patientreg`
+--
+
+DROP TABLE IF EXISTS `patientreg`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patientreg` (
+  `PatientID` int(10) NOT NULL,
+  `PatientName` varchar(20) DEFAULT NULL,
+  `FathersName` varchar(20) DEFAULT NULL,
+  `Email` varchar(30) DEFAULT NULL,
+  `ContactNo` bigint(20) DEFAULT NULL,
+  `Age` int(2) DEFAULT NULL,
+  `Remarks` varchar(100) DEFAULT NULL,
+  `Gender` varchar(1) DEFAULT NULL,
+  `BG` varchar(3) DEFAULT NULL,
+  `Address` varchar(80) DEFAULT NULL,
+  `State` varchar(30) DEFAULT NULL,
+  `City` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`PatientID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patientreg`
+--
+
+LOCK TABLES `patientreg` WRITE;
+/*!40000 ALTER TABLE `patientreg` DISABLE KEYS */;
+INSERT INTO `patientreg` VALUES (1,'Nilesh','Sanjay','n@gmail.com',9503293405,21,'No Remarks','M','O+','Katraj','Maharashtra','Pune');
+/*!40000 ALTER TABLE `patientreg` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `registrations`
 --
 
@@ -78,4 +112,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-10 20:24:59
+-- Dump completed on 2019-08-12  0:01:31
