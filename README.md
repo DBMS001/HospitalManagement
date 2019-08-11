@@ -1,7 +1,7 @@
 # First Deployment
 Setting Environment Variables in Linux
  
-##Use Bash 
+## Use Bash 
     $ export USER='yoursqlusername'
     $ export PASSWORD='yoursqlpassword'
     $ echo $USER
@@ -9,7 +9,6 @@ Setting Environment Variables in Linux
     $ echo $PASSWORD
     $ yoursqlpassword
     
-##Take a look at this
-    [Autoenv](https://github.com/inishchith/autoenv.git)
-    
-    Do go through readme and follow the steps. Makes work easy with env variables     
+## Take a look at this
+[Autoenv](https://github.com/inishchith/autoenv.git) 
+Do go through readme and follow the steps. Makes work easy with env variables     
