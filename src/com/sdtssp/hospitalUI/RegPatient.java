@@ -8,6 +8,8 @@ import com.sdtssp.DBConnect;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,10 +29,10 @@ public class RegPatient extends javax.swing.JFrame {
     
     public boolean manFields()
     {
-        if (jTextField1.getText().equals("") && 
-                jTextField2.getText().equals("") && 
-                jTextField5.getText().equals("") && 
-                jTextArea1.getText().equals("Address") &&
+        if (jTextField1.getText().equals("") ||
+                jTextField2.getText().equals("") || 
+                jTextField5.getText().equals("") ||
+                jTextArea1.getText().equals("Address") ||
                 jList1.getSelectedValue() == null) 
         {
             JOptionPane.showMessageDialog(rootPane,"(*)Fields cannot be Empty","Error", 1);
@@ -329,18 +331,36 @@ public class RegPatient extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String gender;
+        String gender,emailReg,contactReg;
+        System.out.println(jList1.getSelectedValue());
+        emailReg = "^[A-Za-z0-9+_.-]+@(.+)$";
+        contactReg = "^[0-9]{10}$";
+        Pattern patemail,patcontact;
+        patemail = Pattern.compile(emailReg);
+        patcontact = Pattern.compile(contactReg);
+        Matcher emailmatcher,contactmatcher;
+        emailmatcher = patemail.matcher(jTextField4.getText());
+        contactmatcher = patcontact.matcher(jTextField5.getText());
         if(!manFields())
             return;
         if(jRadioButton1.isSelected())
             gender = "M";
         else
             gender = "F";
+        if (!emailmatcher.matches()) {
+            JOptionPane.showMessageDialog(rootPane,"Invalid EmailId!!!!", "Error",1);
+            return;
+        }
+        if(!contactmatcher.matches()){
+            JOptionPane.showMessageDialog(rootPane,"Invalid Contact Number!!!!(Enter valid 10 digit contact number)", "Error",1);
+            return;
+        }
+            
         try {
             con = DBConnect.Connect();
             stmt = con.createStatement();
             String sql = "insert into patientreg values("+jTextField1.getText()+",'"+jTextField2.getText()+"','"+jTextField3.getText()+"','"+jTextField4.getText()+"','"+jTextField5.getText()+"',"+jTextField6.getText()+",'"+jTextArea2.getText()+"','"+gender+"','"+jList1.getSelectedValue()+"','"+jTextArea1.getText()+"','"+jList2.getSelectedValue()+"','"+jList3.getSelectedValue()+"');";
-            stmt.executeUpdate(sql);
+            //stmt.executeUpdate(sql);
         } catch (Exception e) {
             System.err.println(e);
         }
@@ -349,38 +369,14 @@ public class RegPatient extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+/*public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegPatient().setVisible(true);
+                RegPatient rp = new RegPatient();
+                rp.setVisible(true);
             }
         });
-    }
-
+    }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
