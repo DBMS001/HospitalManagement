@@ -1,10 +1,11 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.sdtssp;
-//Hi shree
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author nilesh
+ * @author shreeram
  */
 public class DBConnect 
 {
