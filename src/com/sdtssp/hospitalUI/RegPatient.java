@@ -8,10 +8,8 @@ import com.sdtssp.DBConnect;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-
+import com.sdtssp.Validators;
 /**
  *
  * @author nilesh
@@ -20,6 +18,8 @@ public class RegPatient extends javax.swing.JFrame {
     Statement stmt = null;
     Connection con = null;
     ResultSet rs  = null;
+    Validators v;
+   
     /**
      * Creates new form RegPatient
      */
@@ -331,27 +331,19 @@ public class RegPatient extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String gender,emailReg,contactReg;
-        System.out.println(jList1.getSelectedValue());
-        emailReg = "^[A-Za-z0-9+_.-]+@(.+)$";
-        contactReg = "^[0-9]{10}$";
-        Pattern patemail,patcontact;
-        patemail = Pattern.compile(emailReg);
-        patcontact = Pattern.compile(contactReg);
-        Matcher emailmatcher,contactmatcher;
-        emailmatcher = patemail.matcher(jTextField4.getText());
-        contactmatcher = patcontact.matcher(jTextField5.getText());
+        String gender;
+        v = new Validators();
         if(!manFields())
             return;
         if(jRadioButton1.isSelected())
             gender = "M";
         else
             gender = "F";
-        if (!emailmatcher.matches()) {
+        if (!v.valEmail(jTextField4.getText())) {
             JOptionPane.showMessageDialog(rootPane,"Invalid EmailId!!!!", "Error",1);
             return;
         }
-        if(!contactmatcher.matches()){
+        if(!v.valPhn(jTextField5.getText())){
             JOptionPane.showMessageDialog(rootPane,"Invalid Contact Number!!!!(Enter valid 10 digit contact number)", "Error",1);
             return;
         }

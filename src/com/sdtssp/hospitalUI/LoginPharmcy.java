@@ -163,7 +163,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Retail rt = new Retail();
+        
         con = DBConnect.Connect();
         user_name = jTextField1.getText();
         pass = new String(jPasswordField1.getPassword());
@@ -175,7 +175,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
             if(rs.first()) 
             {
                 this.setVisible(false);
-                rt.setVisible(true);
+                new Menu().setVisible(true);
             }    
             else
             {

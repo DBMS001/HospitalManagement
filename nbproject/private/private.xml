@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/nilesh/NetBeansProjects/HospitalManagement/src/com/sdtssp/hospitalUI/RegPatient.java</file>
-            <file>file:/home/nilesh/NetBeansProjects/HospitalManagement/src/com/sdtssp/DBConnect.java</file>
+            <file>file:/home/nilesh/NetBeansProjects/HospitalManagement/src/com/sdtssp/Validators.java</file>
+            <file>file:/home/nilesh/NetBeansProjects/HospitalManagement/src/com/sdtssp/hospitalUI/Menu.java</file>
+            <file>file:/home/nilesh/NetBeansProjects/HospitalManagement/src/com/sdtssp/hospitalUI/RegDoctor.java</file>
         </group>
     </open-files>
 </project-private>
