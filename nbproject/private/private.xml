@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/shreeram/Documents/NetBeansProjects/HospitalManagement/src/com/sdtssp/hospitalUI/Retail.java</file>
             <file>file:/C:/Users/shreeram/Documents/NetBeansProjects/HospitalManagement/src/com/sdtssp/hospitalUI/LoginPharmcy.java</file>
+=======
+            <file>file:/home/nilesh/NetBeansProjects/HospitalManagement/src/com/sdtssp/hospitalUI/RegPatient.java</file>
+            <file>file:/home/nilesh/NetBeansProjects/HospitalManagement/src/com/sdtssp/DBConnect.java</file>
+>>>>>>> nilesh
         </group>
     </open-files>
 </project-private>
