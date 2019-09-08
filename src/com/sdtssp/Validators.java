@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
 public class Validators {
     final String emailReg = "^[A-Za-z0-9+_.-]+@(.+)$";
     final String contactReg = "^[0-9]{10}$";
+    final public String emailErr = "<html><font color=red>Invalid Email!!!</font></html>";
+    final public String contactErr = "<html><font color=red>Invalid Phone!!!Enter 10 digit Contact.</font></html>";
     Pattern patemail,patcontact;
     
     public Validators(){
