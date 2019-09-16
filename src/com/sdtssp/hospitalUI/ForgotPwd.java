@@ -6,6 +6,7 @@
 package com.sdtssp.hospitalUI;
 
 import com.sdtssp.DBConnect;
+import com.sdtssp.Validators;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,10 +24,12 @@ public class ForgotPwd extends javax.swing.JFrame {
     Statement stmt =null;
     Connection con = null;
     ResultSet rs =null;
+    Validators v;
     /**
      * Creates new form ForgotPwd
      */
     public ForgotPwd() {
+        v = new Validators();
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         initComponents();
     }
@@ -53,11 +56,17 @@ public class ForgotPwd extends javax.swing.JFrame {
         LoginBtn = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
+        EmailErr = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Forgot Password");
 
         Get_PwdBtn.setText("Get Password");
+        Get_PwdBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Get_PwdBtnActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Email");
 
@@ -65,11 +74,22 @@ public class ForgotPwd extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
+        Email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                EmailFocusLost(evt);
+            }
+        });
+
         Sec_Ques.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hospital''s foundation year?", "Hospital''s name?", "Medical''s store name?" }));
 
         jLabel5.setText("Security Answer");
 
         LoginBtn.setText("Login");
+        LoginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginBtnActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("<html><font color=red>All Fields are Mandatory</font></html>");
 
@@ -105,6 +125,10 @@ public class ForgotPwd extends javax.swing.JFrame {
                 .addGap(167, 167, 167)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(EmailErr, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +156,10 @@ public class ForgotPwd extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Get_PwdBtn)
-                    .addComponent(LoginBtn)))
+                    .addComponent(LoginBtn))
+                .addGap(18, 18, 18)
+                .addComponent(EmailErr, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,13 +174,45 @@ public class ForgotPwd extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Get_PwdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Get_PwdBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            String sql = "select password from registrations where email_id='"+Email.getText()+"' and sec_que = '"+Sec_Ques.getSelectedItem()+"' and sec_ans = '"+Sec_Ans.getText()+"';";
+            con = DBConnect.Connect();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            PwdD.setText(rs.getString("password"));
+                    
+        } catch (SQLException ex) {
+            Logger.getLogger(ForgotPwd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_Get_PwdBtnActionPerformed
+
+    private void EmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_EmailFocusLost
+        // TODO add your handling code here:
+        if (!v.valEmail(Email.getText())) {
+            EmailErr.setText(v.emailErr);
+            return;
+        }
+        else
+        EmailErr.setText("");
+    }//GEN-LAST:event_EmailFocusLost
+
+    private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginPharmcy().setVisible(true);
+    }//GEN-LAST:event_LoginBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,6 +251,7 @@ public class ForgotPwd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Email;
+    private javax.swing.JLabel EmailErr;
     private javax.swing.JButton Get_PwdBtn;
     private javax.swing.JButton LoginBtn;
     private javax.swing.JLabel PwdD;

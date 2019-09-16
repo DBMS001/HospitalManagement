@@ -263,6 +263,12 @@ public class NewUser extends javax.swing.JFrame {
 
     private void Contact1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Contact1FocusLost
         // TODO add your handling code here:
+        if (!v.valPhn(Contact1.getText())) {
+            ErrLabel1.setText(v.contactErr);
+            return;
+        }
+        else
+        ErrLabel1.setText("");
     }//GEN-LAST:event_Contact1FocusLost
 
     private void Contact1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Contact1ActionPerformed
@@ -275,6 +281,12 @@ public class NewUser extends javax.swing.JFrame {
 
     private void Email1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Email1FocusLost
         // TODO add your handling code here:
+         if (!v.valEmail(Email1.getText())) {
+            ErrLabel1.setText(v.emailErr);
+            return;
+        }
+        else
+        ErrLabel1.setText("");
     }//GEN-LAST:event_Email1FocusLost
 
     private void Email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Email1ActionPerformed
@@ -283,6 +295,8 @@ public class NewUser extends javax.swing.JFrame {
 
     private void LoginBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtn1ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginPharmcy().setVisible(true);
     }//GEN-LAST:event_LoginBtn1ActionPerformed
 
     /**
