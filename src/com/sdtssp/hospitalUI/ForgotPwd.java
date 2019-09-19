@@ -84,7 +84,7 @@ public class ForgotPwd extends javax.swing.JFrame {
 
         jLabel5.setText("Security Answer");
 
-        LoginBtn.setText("Login");
+        LoginBtn.setText("Back");
         LoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginBtnActionPerformed(evt);
@@ -159,7 +159,7 @@ public class ForgotPwd extends javax.swing.JFrame {
                     .addComponent(LoginBtn))
                 .addGap(18, 18, 18)
                 .addComponent(EmailErr, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
