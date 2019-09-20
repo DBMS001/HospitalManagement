@@ -237,7 +237,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
             }    
             else
             {
-                rs = stmt.executeQuery("select user_name,password from registrations;");
+                rs = stmt.executeQuery("select "+user_name+","+pass+" from registrations;");
                 while (rs.next()){
                     if(rs.getString("user_name").equals(user_name)){
                         JOptionPane.showMessageDialog(rootPane, "Wrong Password!!!","Error", HEIGHT);
