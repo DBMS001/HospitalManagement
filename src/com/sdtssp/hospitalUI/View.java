@@ -262,7 +262,7 @@ public class View extends javax.swing.JFrame {
             if(ViewTab.getColumnName(0).equals("Doctor ID"))
             {
                 System.out.println("In doc");
-                sql = "delete from doctor where DoctorD="+ViewTab.getValueAt(row,0)+"; ";
+                sql = "delete from doctor where DoctorID="+ViewTab.getValueAt(row,0)+"; ";
                 int success = stmt.executeUpdate(sql);
                 if(success!=0)
                 {
