@@ -307,7 +307,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+                    UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
                     new LoginPharmcy().setVisible(true);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(LoginPharmcy.class.getName()).log(Level.SEVERE, null, ex);
