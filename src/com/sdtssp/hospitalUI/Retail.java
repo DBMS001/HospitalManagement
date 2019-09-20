@@ -99,7 +99,7 @@ public class Retail extends javax.swing.JFrame {
         int qty = Integer.parseInt(jTextField1.getText());
         int mrp = Integer.parseInt(jLabel13.getText());
         int amt = qty*mrp;
-        System.err.println("s : " + item);
+        
         if(qty<=0){
             JOptionPane.showMessageDialog(rootPane,"Qauntity cannot be "+qty+"!!!");
             return;
@@ -410,8 +410,7 @@ public class Retail extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(40, 40, 40)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jLabel6)))
                         .addGap(43, 43, 43)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(236, 236, 236))))

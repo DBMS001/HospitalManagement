@@ -16,7 +16,7 @@ public class BillPreview extends javax.swing.JFrame {
      */
     public BillPreview() {
         initComponents();
-        //area.setText("**************************************\n");
+        
         billGenerator();
     }
     void billGenerator(){
