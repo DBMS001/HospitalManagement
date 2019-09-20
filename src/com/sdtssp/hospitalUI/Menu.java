@@ -196,7 +196,7 @@ public class Menu extends javax.swing.JFrame{
         setTitle("Main Menu");
         setBackground(Color.RED);
 
-        jTabbedPane4.setFont(new java.awt.Font("Lucida Bright", 0, 24)); // NOI18N
+        jTabbedPane4.setFont(new java.awt.Font("Chilanka", 2, 24)); // NOI18N
 
         jPanel8.setMaximumSize(new java.awt.Dimension(32767, 32000));
         jPanel8.setPreferredSize(new java.awt.Dimension(851, 620));
@@ -331,7 +331,7 @@ public class Menu extends javax.swing.JFrame{
             }
         });
 
-        AddBtn.setFont(new java.awt.Font("Lucida Bright", 1, 16)); // NOI18N
+        AddBtn.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
         AddBtn.setText("Add");
         AddBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -341,7 +341,7 @@ public class Menu extends javax.swing.JFrame{
 
         BldGrp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" }));
 
-        ResetBtn.setFont(new java.awt.Font("Lucida Bright", 1, 16)); // NOI18N
+        ResetBtn.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
         ResetBtn.setText("Reset");
         ResetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -349,7 +349,7 @@ public class Menu extends javax.swing.JFrame{
             }
         });
 
-        ViewBtn.setFont(new java.awt.Font("Lucida Bright", 1, 16)); // NOI18N
+        ViewBtn.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
         ViewBtn.setText("VIew");
         ViewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -582,7 +582,7 @@ public class Menu extends javax.swing.JFrame{
         buttonGroup1.add(FemaleD);
         FemaleD.setText("Female");
 
-        Add_Doc.setFont(new java.awt.Font("Lucida Bright", 1, 16)); // NOI18N
+        Add_Doc.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
         Add_Doc.setText("Add Doctor");
         Add_Doc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -600,7 +600,7 @@ public class Menu extends javax.swing.JFrame{
         jLabel52.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel52.setText("Doctor Registration");
 
-        jButton1.setFont(new java.awt.Font("Lucida Bright", 1, 16)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
         jButton1.setText("View");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -608,7 +608,7 @@ public class Menu extends javax.swing.JFrame{
             }
         });
 
-        ResetBtnD.setFont(new java.awt.Font("Lucida Bright", 1, 16)); // NOI18N
+        ResetBtnD.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
         ResetBtnD.setText("Reset");
         ResetBtnD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -848,6 +848,7 @@ public class Menu extends javax.swing.JFrame{
         });
         jScrollPane1.setViewportView(jTextArea1);
 
+        jButton2.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
         jButton2.setText("Confirm");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -882,7 +883,7 @@ public class Menu extends javax.swing.JFrame{
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(30, Short.MAX_VALUE))
+                        .addContainerGap(32, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
@@ -934,7 +935,7 @@ public class Menu extends javax.swing.JFrame{
                 .addContainerGap(262, Short.MAX_VALUE))
         );
 
-        GenBillBtn.setFont(new java.awt.Font("Lucida Bright", 1, 16)); // NOI18N
+        GenBillBtn.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
         GenBillBtn.setText("Generate Bill");
         GenBillBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -962,7 +963,7 @@ public class Menu extends javax.swing.JFrame{
                 .addComponent(GenBillBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         jPanel5.getAccessibleContext().setAccessibleName("");
@@ -970,7 +971,7 @@ public class Menu extends javax.swing.JFrame{
         jTabbedPane4.addTab("MEDICINES", jPanel4);
         jTabbedPane4.setEnabledAt(3, false);
 
-        LogoutBtn.setFont(new java.awt.Font("Lucida Bright", 3, 16)); // NOI18N
+        LogoutBtn.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
         LogoutBtn.setText("Logout");
         LogoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -983,11 +984,11 @@ public class Menu extends javax.swing.JFrame{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 853, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LogoutBtn)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1179,6 +1180,7 @@ public class Menu extends javax.swing.JFrame{
 
     private void GenBillBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenBillBtnActionPerformed
         // TODO add your handling code here:
+        new Billing().setVisible(true);
     }//GEN-LAST:event_GenBillBtnActionPerformed
 
     private void jTextArea1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextArea1FocusGained

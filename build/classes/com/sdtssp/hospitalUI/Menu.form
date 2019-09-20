@@ -34,11 +34,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jTabbedPane4" min="-2" pref="853" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="LogoutBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,7 +62,7 @@
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Lucida Bright" size="24" style="0"/>
+          <Font name="Chilanka" size="24" style="2"/>
         </Property>
       </Properties>
 
@@ -566,7 +566,7 @@
             <Component class="javax.swing.JButton" name="AddBtn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Bright" size="16" style="1"/>
+                  <Font name="Chilanka" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
@@ -596,7 +596,7 @@
             <Component class="javax.swing.JButton" name="ResetBtn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Bright" size="16" style="1"/>
+                  <Font name="Chilanka" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reset"/>
               </Properties>
@@ -607,7 +607,7 @@
             <Component class="javax.swing.JButton" name="ViewBtn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Bright" size="16" style="1"/>
+                  <Font name="Chilanka" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="VIew"/>
               </Properties>
@@ -987,7 +987,7 @@
             <Component class="javax.swing.JButton" name="Add_Doc">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Bright" size="16" style="1"/>
+                  <Font name="Chilanka" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add Doctor"/>
               </Properties>
@@ -1039,7 +1039,7 @@
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Bright" size="16" style="1"/>
+                  <Font name="Chilanka" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="View"/>
               </Properties>
@@ -1050,7 +1050,7 @@
             <Component class="javax.swing.JButton" name="ResetBtnD">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Bright" size="16" style="1"/>
+                  <Font name="Chilanka" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Reset"/>
               </Properties>
@@ -1102,7 +1102,7 @@
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jScrollPane1" min="-2" pref="145" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="30" max="32767" attributes="0"/>
+                              <EmptySpace pref="32" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
@@ -1301,6 +1301,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Chilanka" size="18" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Confirm"/>
               </Properties>
               <Events>
@@ -1343,7 +1346,7 @@
                       <Component id="GenBillBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="180" max="32767" attributes="0"/>
+                      <EmptySpace pref="189" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1445,7 +1448,7 @@
             <Component class="javax.swing.JButton" name="GenBillBtn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Bright" size="16" style="1"/>
+                  <Font name="Chilanka" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Generate Bill"/>
               </Properties>
@@ -1460,7 +1463,7 @@
     <Component class="javax.swing.JButton" name="LogoutBtn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Lucida Bright" size="16" style="3"/>
+          <Font name="Chilanka" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Logout"/>
       </Properties>
