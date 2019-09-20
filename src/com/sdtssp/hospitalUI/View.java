@@ -153,6 +153,7 @@ public class View extends javax.swing.JFrame {
     );
     jScrollPane1.setViewportView(ViewTab);
 
+    UpdBtn.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
     UpdBtn.setText("Update");
     UpdBtn.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
