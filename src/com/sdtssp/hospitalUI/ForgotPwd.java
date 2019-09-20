@@ -31,6 +31,7 @@ public class ForgotPwd extends javax.swing.JFrame {
      */
     public ForgotPwd() {
         v = new Validators();
+        con = DBConnect.Connect();
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         getContentPane().setBackground(Color.getHSBColor(1, 1, 0.38f));
         initComponents();
@@ -203,7 +204,7 @@ public class ForgotPwd extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             String sql = "select password from registrations where email_id='"+Email.getText()+"' and sec_que = '"+Sec_Ques.getSelectedItem()+"' and sec_ans = '"+Sec_Ans.getText()+"';";
-            con = DBConnect.Connect();
+            
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();

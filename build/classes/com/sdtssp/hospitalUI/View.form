@@ -56,6 +56,8 @@
                   <EmptySpace min="-2" pref="301" max="-2" attributes="0"/>
                   <Component id="UpdBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="deleteRecBtn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="393" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -65,7 +67,10 @@
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Component id="UpdBtn" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="UpdBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteRecBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -100,6 +105,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="deleteRecBtn">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Chilanka" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Delete"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteRecBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
