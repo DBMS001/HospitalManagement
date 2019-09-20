@@ -18,7 +18,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author nilesh
@@ -40,6 +43,7 @@ public class Menu extends javax.swing.JFrame{
      */
     public Menu() { 
         v = new Validators();
+        con = DBConnect.Connect();
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         getContentPane().setBackground(Color.getHSBColor(1, 1, 0.38f));
         initComponents();
@@ -48,8 +52,40 @@ public class Menu extends javax.swing.JFrame{
     
     public void generateID(){
         
-        P_id.setText(Integer.toString(new Random().nextInt(51)+1));
-        txtId.setText(Integer.toString(new Random().nextInt(5)+1));
+        try {
+            String patid = Integer.toString(new Random().nextInt(51)+1);
+            String docid = Integer.toString(new Random().nextInt(5)+1);
+            Statement stmt1 = con.createStatement();
+            Statement stmt2 = con.createStatement();
+            P_id.setText(patid);
+            //System.out.println(patid);
+            txtId.setText(docid);
+            String sqlpat = "select PatientID from patientreg;";
+            String sqldoc = "select DoctorID from doctor;";
+            ResultSet pat , doc;
+            
+            pat = stmt1.executeQuery(sqlpat);
+            doc = stmt2.executeQuery(sqldoc);
+//            System.out.println(pat.getInt("PatientID"));
+            while(pat.next()){
+                
+                if(pat.getInt(1) == Integer.parseInt(patid))
+                { 
+                    generateID();
+                    break;
+                }
+            }
+            while(doc.next()){
+                if(doc.getInt(1) == Integer.parseInt(docid))
+                {
+                    generateID();
+                    break;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+        
     }
     
     public void resetF() {
@@ -201,7 +237,7 @@ public class Menu extends javax.swing.JFrame{
         jPanel8.setMaximumSize(new java.awt.Dimension(32767, 32000));
         jPanel8.setPreferredSize(new java.awt.Dimension(851, 620));
 
-        jLabel27.setFont(new java.awt.Font("Lucida Bright", 1, 18)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel27.setText("Patient  Registration");
 
         jLabel28.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -228,7 +264,7 @@ public class Menu extends javax.swing.JFrame{
         jLabel35.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel35.setText("<html>Blood Group<font color=\"red\">*</font>");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Address"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Address", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("TlwgTypewriter", 1, 18))); // NOI18N
 
         jLabel36.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel36.setText("<html>Address<font color=\"red\">*</font>");
@@ -244,10 +280,10 @@ public class Menu extends javax.swing.JFrame{
         });
         jScrollPane4.setViewportView(Add2);
 
-        jLabel37.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel37.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel37.setText("State");
 
-        jLabel38.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel38.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel38.setText("City");
 
         State2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maharashtra" }));
@@ -305,6 +341,11 @@ public class Menu extends javax.swing.JFrame{
         Remarks.setLineWrap(true);
         Remarks.setRows(5);
         Remarks.setText("Remarks if any");
+        Remarks.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                RemarksFocusGained(evt);
+            }
+        });
         jScrollPane2.setViewportView(Remarks);
 
         Email.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -417,7 +458,7 @@ public class Menu extends javax.swing.JFrame{
                 .addComponent(AlttDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -432,10 +473,11 @@ public class Menu extends javax.swing.JFrame{
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(105, 105, 105)
                         .addComponent(ResetBtn))
-                    .addComponent(jLabel13)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(ErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(409, 409, 409))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -503,24 +545,25 @@ public class Menu extends javax.swing.JFrame{
                     .addComponent(AlttDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(AddBtn))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(228, 228, 228)
                         .addComponent(ViewBtn))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(ResetBtn))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jLabel13))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(ErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(ErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(AddBtn))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(129, 129, 129)
+                                .addComponent(ResetBtn))))))
         );
 
         jTabbedPane4.addTab("PATIENT", jPanel8);
@@ -596,7 +639,7 @@ public class Menu extends javax.swing.JFrame{
 
         BldGrp1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" }));
 
-        jLabel52.setFont(new java.awt.Font("Lucida Bright", 1, 18)); // NOI18N
+        jLabel52.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel52.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel52.setText("Doctor Registration");
 
@@ -761,7 +804,7 @@ public class Menu extends javax.swing.JFrame{
 
         jTabbedPane4.addTab("DOCTOR", jPanel6);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Treatments"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Treatments", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("TlwgTypewriter", 1, 18))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Panchakarma");
@@ -883,7 +926,7 @@ public class Menu extends javax.swing.JFrame{
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(32, Short.MAX_VALUE))
+                        .addContainerGap(21, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
@@ -892,7 +935,7 @@ public class Menu extends javax.swing.JFrame{
 
         jTabbedPane4.addTab("PANCHAKARMA", jPanel1);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Medicines"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Medicines", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("TlwgTypewriter", 1, 18))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Prepared Meds");
@@ -963,7 +1006,7 @@ public class Menu extends javax.swing.JFrame{
                 .addComponent(GenBillBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         jPanel5.getAccessibleContext().setAccessibleName("");
@@ -1013,20 +1056,16 @@ public class Menu extends javax.swing.JFrame{
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
         // TODO add your handling code here:
         ImageIcon icon = new ImageIcon("src/images/icons8-task-completed-48.png");
-        String gender,remarks;
+        String gender;
         if(!manFields("Patient"))
             return;
         if(Male.isSelected())
         gender = "M";
         else
         gender = "F";
-        remarks = Remarks.getText();
-        if(remarks.equals("Remarks if any"))
-            remarks="";
         try {
-            con = DBConnect.Connect();
             stmt = con.createStatement();
-            String sql = "insert into patientreg values("+P_id.getText()+",'"+Name.getText()+"','"+F_Name.getText()+"','"+Email.getText()+"','"+Contact.getText()+"',"+Age.getText()+",'"+remarks+"','"+gender+"','"+BldGrp.getSelectedItem()+"','"+AlttDoc.getSelectedItem()+"','"+Add2.getText()+"','"+State2.getSelectedItem()+"','"+City2.getSelectedItem()+"');";
+            String sql = "insert into patientreg values("+P_id.getText()+",'"+Name.getText()+"','"+F_Name.getText()+"','"+Email.getText()+"','"+Contact.getText()+"',"+Age.getText()+",'"+Remarks.getText()+"','"+gender+"','"+BldGrp.getSelectedItem()+"','"+AlttDoc.getSelectedItem()+"','"+Add2.getText()+"','"+State2.getSelectedItem()+"','"+City2.getSelectedItem()+"');";
             System.out.println(sql);
             if(stmt.executeUpdate(sql)==1)
             {
@@ -1077,7 +1116,7 @@ public class Menu extends javax.swing.JFrame{
         gender = "F";
         
         try {
-            con = DBConnect.Connect();
+            //con = DBConnect.Connect();
             stmt = con.createStatement();
             String sql = "insert into doctor values("+txtId.getText()+",'"+txtName.getText()+"','"+txtFname.getText()+"','"+txtE.getText()+"',"+txtC.getText()+",'"+txtQ.getText()+"','"+gender+"','"+BldGrp1.getSelectedItem()+"','"+strDate+"','"+AddArea.getText()+"');";
             System.out.println(sql);
@@ -1190,13 +1229,18 @@ public class Menu extends javax.swing.JFrame{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-       if(JOptionPane.showConfirmDialog(rootPane, "Hiiii") == 0)
+       if(JOptionPane.showConfirmDialog(rootPane, "Are you sure???") == 0)
        {
            jTabbedPane4.setEnabledAt(3,true);
            jTabbedPane4.setSelectedIndex(3);
            
        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void RemarksFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_RemarksFocusGained
+        // TODO add your handling code here:
+        Remarks.setText("");
+    }//GEN-LAST:event_RemarksFocusGained
 
     /**
      * @param args the command line arguments

@@ -32,12 +32,14 @@ public class NewUser extends javax.swing.JFrame {
      */
     public NewUser() {
         v = new Validators();
+        con = DBConnect.Connect();
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         initComponents();
         getContentPane().setBackground(Color.getHSBColor(1, 1, 0.38f));
         CPwd1.setEnabled(false);
     }
-    public void reset(){
+    public void reset()
+    {
         Name1.setText("");
         UName1.setText("");
         Pwd1.setText("");
@@ -301,7 +303,7 @@ public class NewUser extends javax.swing.JFrame {
         try {
             ImageIcon icon = new ImageIcon("src/images/icons8-task-completed-48.png");
             // TODO add your handling code here:
-            con = DBConnect.Connect();
+            
             stmt = con.createStatement();
             if(Pwd1.getText().equals(CPwd1.getText()))
             {

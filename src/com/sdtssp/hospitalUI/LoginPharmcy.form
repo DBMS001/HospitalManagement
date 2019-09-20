@@ -70,7 +70,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder justification="2" title="LOGIN">
-              <Font PropertyName="font" name="Dialog" size="18" style="1"/>
+              <Font PropertyName="font" name="TlwgTypewriter" size="24" style="1"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -168,7 +168,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Lucida Sans Typewriter" size="24" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="User id"/>
+            <Property name="text" type="java.lang.String" value="User Id"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">

@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -141,6 +143,7 @@ public class View extends javax.swing.JFrame {
         else
         str = this.doc;
         UpdBtn = new javax.swing.JButton();
+        deleteRecBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Data");
@@ -161,6 +164,14 @@ public class View extends javax.swing.JFrame {
         }
     });
 
+    deleteRecBtn.setFont(new java.awt.Font("Chilanka", 1, 18)); // NOI18N
+    deleteRecBtn.setText("Delete");
+    deleteRecBtn.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            deleteRecBtnActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
@@ -172,7 +183,9 @@ public class View extends javax.swing.JFrame {
         .addGroup(jPanel1Layout.createSequentialGroup()
             .addGap(301, 301, 301)
             .addComponent(UpdBtn)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(deleteRecBtn)
+            .addGap(393, 393, 393))
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +193,9 @@ public class View extends javax.swing.JFrame {
             .addGap(30, 30, 30)
             .addComponent(jScrollPane1)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(UpdBtn)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(UpdBtn)
+                .addComponent(deleteRecBtn))
             .addContainerGap())
     );
 
@@ -211,17 +226,54 @@ public class View extends javax.swing.JFrame {
             String sql="";
             con = DBConnect.Connect();
             stmt = con.createStatement();
+            
             int i = ViewTab.getEditingRow();
             int j = ViewTab.getEditingColumn();
             if(ViewTab.getColumnName(0).equals("Patient Id"))
             {
-                sql = "update table patientreg set "+patientdb.get(j)+" = '"+ViewTab.getValueAt(i,j)+"' where PatientID = "+ViewTab.getValueAt(i,0)+"";
+                int row = ViewTab.getSelectedRow();
+                sql = "update table patientreg set "+patientdb.get(j)+" = '"+ViewTab.getValueAt(row,j)+"' where PatientID = "+ViewTab.getValueAt(i,0)+"";
             }
             System.out.println(sql);
         } catch (SQLException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_UpdBtnActionPerformed
+
+    private void deleteRecBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecBtnActionPerformed
+        try {
+            // TODO add your handling code here:
+            ImageIcon icon = new ImageIcon("src/images/icons8-task-completed-48.png");
+            int row = ViewTab.getSelectedRow();
+            stmt = con.createStatement();
+            
+            String sql;
+            if(ViewTab.getColumnName(0).equals("Patient Id"))
+            {
+                sql = "delete from patientreg where PatientID="+ViewTab.getValueAt(row,0)+"; ";
+                int success = stmt.executeUpdate(sql);
+                if(success!=0)
+                {
+                    JOptionPane.showMessageDialog(rootPane,"Patient Deleted Successfully", "Success",1,icon);
+                    ((DefaultTableModel)ViewTab.getModel()).removeRow(row);
+                }             
+            }
+            
+            if(ViewTab.getColumnName(0).equals("Doctor ID"))
+            {
+                System.out.println("In doc");
+                sql = "delete from doctor where DoctorD="+ViewTab.getValueAt(row,0)+"; ";
+                int success = stmt.executeUpdate(sql);
+                if(success!=0)
+                {
+                    JOptionPane.showMessageDialog(rootPane,"Doctor Deleted Successfully", "Success",1,icon);
+                    ((DefaultTableModel)ViewTab.getModel()).removeRow(row);
+                }             
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_deleteRecBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,6 +313,7 @@ public class View extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton UpdBtn;
     private javax.swing.JTable ViewTab;
+    private javax.swing.JButton deleteRecBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

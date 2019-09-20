@@ -11,11 +11,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+*/
 
 /**
  *
@@ -83,7 +85,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
         setIconImage(new ImageIcon("/home/nilesh/NetBeansProjects/HospitalManagement/src/images/panchaved-logo.png").getImage()
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOGIN", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOGIN", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("TlwgTypewriter", 1, 24))); // NOI18N
         jPanel2.setToolTipText("");
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setMaximumSize(null);
@@ -91,7 +93,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
         jPanel2.setVerifyInputWhenFocusTarget(false);
 
         jLabel1.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 24)); // NOI18N
-        jLabel1.setText("User id");
+        jLabel1.setText("User Id");
 
         jLabel2.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 24)); // NOI18N
         jLabel2.setText("Password");
@@ -248,10 +250,7 @@ public class LoginPharmcy extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             Logger.getLogger(LoginPharmcy.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        
-//       
+        }     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -307,7 +306,18 @@ public class LoginPharmcy extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginPharmcy().setVisible(true);
+                try {
+                    UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+                    new LoginPharmcy().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(LoginPharmcy.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(LoginPharmcy.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(LoginPharmcy.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(LoginPharmcy.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
