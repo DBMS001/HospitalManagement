@@ -6,7 +6,7 @@
 
 package com.sdtssp.hospitalUI;
 
-import com.sdtssp.DBConnect;
+import com.sdtssp.*;
 import javax.swing.JComboBox;
 import org.jdesktop.swingx.autocomplete.*;
 import java.awt.Toolkit;
@@ -19,11 +19,16 @@ import java.text.MessageFormat;
 import javax.swing.JTable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 //import sun.applet.Main;
 
 /**
@@ -33,36 +38,41 @@ import javax.swing.table.DefaultTableModel;
 public class Retail extends javax.swing.JFrame {
     Statement stmt = null;
     Connection con = null;
-    ResultSet rs  = null;
+    ResultSet rs ;
     int totalAmount = 0;
+    Medicine row;
+    List medicineList;
+    MedicineTableModel model;
+    DefaultTableModel dtm;
     /**
      * Creates new form Retail
      */
-        DefaultTableModel dtm;
-
     public Retail() {
         initComponents();
+        
         dtm = (DefaultTableModel) jTable1.getModel();
+        
         jComboBox1.setEditable(true);
         AutoCompleteDecorator.decorate(jComboBox1);
         jTable1.setShowGrid(true);
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	LocalDate localDate = LocalDate.now();
-	try{
-            con = DBConnect.Connect();
-            stmt = con.createStatement();
-            rs = stmt.executeQuery("select Name from medicine");
-            while(rs.next()){
-            String medItem = rs.getString("Name");
-            jComboBox1.addItem(medItem);
-            }
-        }
-        catch(SQLException e){
-        e.printStackTrace();
-        }
+        loadMedicines();
         jLabel4.setText(dtf.format(localDate));
     
+    }
+    
+    void loadMedicines(){
+    try {
+            rs = Pharmacy.selectMedItems("is not null");
+            while (rs.next()) {
+                 String medItem = rs.getString("Name");
+                jComboBox1.addItem(medItem);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Retail.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     int calculateTotal(String cmd, int amt){
@@ -74,6 +84,27 @@ public class Retail extends javax.swing.JFrame {
         
     return totalAmount;
     }
+    
+    void updateQty(int qty, String item,String command){
+        int available = 0;
+        int newQty = 0; 
+        try {
+            rs = Pharmacy.selectMedItems("='"+item+"'");
+            while(rs.next()){
+                available = rs.getInt("Qty");
+            }
+            if(command.equals("sub")){
+                newQty = (available - qty);
+            }else{
+                newQty = (available + qty);
+            }
+            if(Pharmacy.updateMedQty(newQty, item) != 0){
+                jLabel8.setText(Integer.toString( newQty ));
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(Retail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
      void removeItem() {
         for (int i = 0;i<dtm.getRowCount();i++ ) {
             if((Boolean)dtm.getValueAt(i,0)==true){
@@ -82,6 +113,8 @@ public class Retail extends javax.swing.JFrame {
             jLabel14.setText(Integer.toString(total));
                 System.out.println("val :"+ Integer.parseInt(dtm.getValueAt(i,5).toString()));
                 System.out.println("totalAmount :"+totalAmount+" total:"+total);
+                int modelQty = (int)dtm.getValueAt(i,3);
+                updateQty(modelQty, (String)dtm.getValueAt(i,1), "add");
             dtm.removeRow(i);
             jLabel16.setText(Integer.toString(jTable1.getRowCount()));
             }
@@ -95,18 +128,30 @@ public class Retail extends javax.swing.JFrame {
         return ;
         }
         String item = jComboBox1.getSelectedItem().toString();
+        
         int batch = Integer.parseInt(jLabel11.getText());
         int qty = Integer.parseInt(jTextField1.getText());
-        int mrp = Integer.parseInt(jLabel13.getText());
-        int amt = qty*mrp;
-        
         if(qty<=0){
             JOptionPane.showMessageDialog(rootPane,"Qauntity cannot be "+qty+"!!!");
             return;
         }
+        int mrp = Integer.parseInt(jLabel13.getText());
+        int amt = qty*mrp;
+        int currQty=Integer.parseInt(jTextField1.getText());
+        
+        updateQty(currQty,item,"sub");
+        for(int i=0;i<dtm.getRowCount();i++){  //makes changes for qty and amount in UI table
+        
+            if(dtm.getValueAt(i,1).toString().equals(item)){
+                qty = (int)dtm.getValueAt(i,3)+qty;
+                dtm.removeRow(i);
+                amt = qty*mrp;
+                System.out.println("qty : "+qty);
+            }
+        }
         dtm.addRow(new Object[]{false, item, batch, qty, mrp, amt});
         jLabel16.setText(Integer.toString(jTable1.getRowCount()));
-        int total = calculateTotal("add", Integer.parseInt(dtm.getValueAt(jTable1.getRowCount()-1,5).toString()));
+        int total = calculateTotal("add", currQty*mrp);
         jLabel14.setText(Integer.toString(total));
     }
     @SuppressWarnings("unchecked")
@@ -181,7 +226,7 @@ public class Retail extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Drug Name :");
+        jLabel5.setText("Medicine Name :");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -369,20 +414,18 @@ public class Retail extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -405,38 +448,37 @@ public class Retail extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(40, 40, 40)
                                 .addComponent(jLabel6)))
-                        .addGap(43, 43, 43)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(236, 236, 236))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap(203, Short.MAX_VALUE)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
+                                .addGap(23, 23, 23)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -460,7 +502,7 @@ public class Retail extends javax.swing.JFrame {
                                 .addGap(85, 85, 85)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton3))))
-                .addContainerGap())
+                .addGap(13, 13, 13))
         );
 
         pack();
@@ -514,9 +556,8 @@ public class Retail extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String medItem = jComboBox1.getSelectedItem().toString();
         try {
-            stmt = con.createStatement();
-            String sql = "select * from medicine where Name ="+"'"+medItem+"'";
-            rs = stmt.executeQuery(sql);
+            System.out.println("HELLOO");
+            rs = Pharmacy.selectMedItems("='"+medItem+"'");
             while (rs.next()) {
                 jLabel8.setText(Integer.toString(rs.getInt("Qty")));
                 jLabel11.setText(Integer.toString(rs.getInt("BatchNo")));
