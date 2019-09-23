@@ -7,22 +7,15 @@
 package com.sdtssp.hospitalUI;
 
 import com.sdtssp.*;
-import javax.swing.JComboBox;
 import org.jdesktop.swingx.autocomplete.*;
-import java.awt.Toolkit;
-import java.awt.print.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
-import javax.swing.JTable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;

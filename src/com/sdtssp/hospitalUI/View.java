@@ -64,9 +64,9 @@ public class View extends javax.swing.JFrame {
             doctordb.put(8, "DateOfJoining");
             doctordb.put(9, "Address");
         this.Caller = Caller;
-      //  this.pat = new String [] {
-        //        "Patient Id", "Patient's Name", "Father's Name", "Email", "Contact", "Age", "Remarks", "Gender", "Blood Group", "Doctor", "Address", "State", "City"
-          //  };
+        this.pat = new String [] {
+                "Patient Id", "Patient's Name", "Father's Name", "Email", "Contact", "Age", "Remarks", "Gender", "Blood Group", "Doctor", "Address", "State", "City"
+            };
         this.doc = new String [] {
                 "Doctor ID", "Doctor's Name", "Father's Name", "Email", "Contact", "Qualification", "Gender", "Blood Group", "Date of Joining", "Address"
             };
@@ -262,7 +262,7 @@ public class View extends javax.swing.JFrame {
             if(ViewTab.getColumnName(0).equals("Doctor ID"))
             {
                 System.out.println("In doc");
-                sql = "delete from doctor where DoctorD="+ViewTab.getValueAt(row,0)+"; ";
+                sql = "delete from doctor where DoctorID="+ViewTab.getValueAt(row,0)+"; ";
                 int success = stmt.executeUpdate(sql);
                 if(success!=0)
                 {
