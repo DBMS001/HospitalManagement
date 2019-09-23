@@ -27,7 +27,8 @@ public class DBConnect
         try 
         {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println(user+" "+password);
+            System.out.println(user+" "+password);  
+
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital",user, password);  
             return con;
         } catch (ClassNotFoundException|SQLException ex) 
