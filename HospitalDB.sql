@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8mb4 ;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -135,33 +135,6 @@ LOCK TABLES `registrations` WRITE;
 INSERT INTO `registrations` VALUES ('shreeram','shree','shree123','shreeramk.1998@gmail.com',1,'Hospital\'s foundation year?','9552951410'),('Nilesh','Nil','nilesh','n.suryawanshi1168@gmail.com',9503293405,'Hospital\'s foundation year?','1990');
 /*!40000 ALTER TABLE `registrations` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `users` (
-  `user_name` char(20) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
-  `contact_no` bigint(20) NOT NULL,
-  PRIMARY KEY (`contact_no`),
-  KEY `contact_no` (`contact_no`,`password`),
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`contact_no`, `password`) REFERENCES `registrations` (`contact_no`, `password`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('nil','nilesh@8101998',9049425095),('shree','shreeram1998',9552951410);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -172,4 +145,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-22  4:17:34
+-- Dump completed on 2019-09-22 16:20:26
