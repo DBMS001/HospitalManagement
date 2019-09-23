@@ -50,6 +50,7 @@ public class Retail extends javax.swing.JFrame {
         dtm = (DefaultTableModel) jTable1.getModel();
         
         jComboBox1.setEditable(true);
+        
         AutoCompleteDecorator.decorate(jComboBox1);
         jTable1.setShowGrid(true);
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -572,11 +573,21 @@ public class Retail extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
+     jComboBox1.addActionListener(new ActionListener() {
+
+    private void jComboBox1KeyPressed(java.awt.event.KeyEvent evt) {                                      
+        System.out.println("get key code :"+evt.getKeyCode());
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            jButton4.doClick();
+    }   
+});
+    
     private void jComboBox1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox1KeyPressed
         System.out.println("get key code :"+evt.getKeyCode());
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
             jButton4.doClick();
     }//GEN-LAST:event_jComboBox1KeyPressed
+   
 
      public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
