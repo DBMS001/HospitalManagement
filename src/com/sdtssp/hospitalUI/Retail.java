@@ -10,6 +10,7 @@ import com.sdtssp.*;
 import javax.swing.JComboBox;
 import org.jdesktop.swingx.autocomplete.*;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.print.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -222,6 +223,11 @@ public class Retail extends javax.swing.JFrame {
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
+            }
+        });
+        jComboBox1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jComboBox1KeyPressed(evt);
             }
         });
 
@@ -518,6 +524,7 @@ public class Retail extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+     
         System.out.println("tem :" +jComboBox1.getSelectedItem().toString());
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -568,6 +575,12 @@ public class Retail extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBox1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox1KeyPressed
+        System.out.println("get key code :"+evt.getKeyCode());
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+            jButton4.doClick();
+    }//GEN-LAST:event_jComboBox1KeyPressed
 
      public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
